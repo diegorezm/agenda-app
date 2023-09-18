@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-export async function connection() {
+export async function connect() {
   try {
     mongoose.connect(process.env.MONGO_URL)
     const connection = mongoose.connection
@@ -9,7 +9,7 @@ export async function connection() {
     connection.on('error', (err) => {
       console.log('Connection error! Make sure mongo db is running!')
       console.log(err)
-      process.exit();
+      process.exit(1);
     })
   } catch (error) {
     console.log("Something went wrong!");
