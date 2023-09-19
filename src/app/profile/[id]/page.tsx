@@ -18,8 +18,8 @@ interface contact {
 export default function ProfilePage() {
   const [contact, setContact] = useState<contact[]>([])
   const [showForm, setShowForm] = useState(false)
-  const [ showEditForm, setShowEditForm] = useState(false)
-  const [ editId, setEditId] = useState("")
+  const [showEditForm, setShowEditForm] = useState(false)
+  const [editId, setEditId] = useState("")
   const showHideForm = () => {
     setShowForm(prev => !prev)
   }
@@ -35,12 +35,12 @@ export default function ProfilePage() {
     updatedContacts.splice(index, 1)
     setContact(updatedContacts)
     try {
-     await axios.post("/api/contacts/delete",{_id: id}) 
-     toast.success("Contact deleted!")
+      await axios.post("/api/contacts/delete", { _id: id })
+      toast.success("Contact deleted!")
     } catch (error: any) {
       console.error(error.message)
       toast.error("Something went wrong!")
-      
+
     }
   }
 
@@ -60,31 +60,35 @@ export default function ProfilePage() {
   }, [])
   return (
     <div>
-      {showEditForm && <EditContact showHideForm={showHideEditForm} _id={editId}/>}
+      {showEditForm && <EditContact showHideForm={showHideEditForm} _id={editId} />}
       {showForm && <CreateContact showHideForm={showHideForm} />}
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl">Agenda</h1>
-        <h2 className="text-lg text-gray-700">Your contacts:</h2>
 
         {contact.length === 0 ? (
-          <p className="text-gray-500">You don't have any contacts :(</p>
+          <p className="text-gray-500 py-2">You don't have any contacts :(</p>
         ) : (
-          <table className="w-1/2">
-            <tbody>
-              {contact.map((i, j) => (
-                <ContactCard
-                  deleteContacts={() => deleteContacts(i._id, j)}
-                  editContacts={() => editContacts(i._id)}
-                  index={j}
-                  _id={i._id}
-                  name={i.name}
-                  email={i.email}
-                  phone_number={i.phone_number}
-                  key={i._id}
-                />
-              ))}
-            </tbody>
-          </table>
+          <div>
+            <div className="flex items-center justify-center m-2">
+              <h2 className="text-lg text-gray-700">Your contacts:</h2>
+            </div>
+            <table className="w-1/2">
+              <tbody>
+                {contact.map((i, j) => (
+                  <ContactCard
+                    deleteContacts={() => deleteContacts(i._id, j)}
+                    editContacts={() => editContacts(i._id)}
+                    index={j}
+                    _id={i._id}
+                    name={i.name}
+                    email={i.email}
+                    phone_number={i.phone_number}
+                    key={i._id}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       <div className="absolute bottom-0 right-2 m-5">
@@ -96,5 +100,5 @@ export default function ProfilePage() {
         </button>
       </div>
     </div>
-  )             
+  )
 }

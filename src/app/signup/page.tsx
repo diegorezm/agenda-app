@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Input } from "../components/Input";
 import LoadingScreen from "../components/Loading";
+import foto1 from '@/assets/high five hands-bro.svg'
+import Image from "next/image";
 
 interface UserInfo {
   username: string;
@@ -14,14 +16,14 @@ interface UserInfo {
 
 export default function Signup() {
   const route = useRouter()
-  const [ loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState<UserInfo>({
     username: "",
     email: "",
     password: ""
   });
 
-const handleInputChange = (fieldName: string, fieldValue: string) => {
+  const handleInputChange = (fieldName: string, fieldValue: string) => {
     const updatedUser = { ...user, [fieldName]: fieldValue };
     setUser(updatedUser);
   };
@@ -36,37 +38,42 @@ const handleInputChange = (fieldName: string, fieldValue: string) => {
     } catch (error: any) {
       console.log("Signup failed!", error.message)
       toast.error("Signup failed!")
-    }finally{
+    } finally {
       setLoading(false)
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center my-28 shadow-lg w-3/5 m-auto">
-      <h1 className="p-2 text-3xl">
-        Signup
-      </h1>
-      <Input
-        label="Username"
-        value={user.username}
-        onChange={(value) => handleInputChange("username", value)}
-      />
-      <Input
-        label="Email"
-        value={user.email}
-        type="email"
-        onChange={(value) => handleInputChange("email", value)}
-      />
-      <Input
-        label="Password"
-        type="password"
-        value={user.password}
-        onChange={(value) => handleInputChange("password", value)}
-      />
-      <button type="submit" className="bg-blue-500 text-white rounded-full w-20 my-2 hover:bg-blue-300">{loading ? <LoadingScreen/> : "Signup"}</button>
+    <div className="flex flex-row justify-center">
+      <div className="m-4">
+        <Image src={foto1} alt="image" />
+      </div>
+      <form onSubmit={handleSubmit} className="flex flex-col items-center my-32 shadow-lg w-3/5 m-auto">
+        <h1 className="p-2 text-3xl">
+          Signup
+        </h1>
+        <Input
+          label="Username"
+          value={user.username}
+          onChange={(value) => handleInputChange("username", value)}
+        />
+        <Input
+          label="Email"
+          value={user.email}
+          type="email"
+          onChange={(value) => handleInputChange("email", value)}
+        />
+        <Input
+          label="Password"
+          type="password"
+          value={user.password}
+          onChange={(value) => handleInputChange("password", value)}
+        />
+        <button type="submit" className="bg-blue-500 text-white rounded-full w-20 h-8 my-2 hover:bg-blue-300">{loading ? <LoadingScreen /> : "Signup"}</button>
 
-      <a href="/login" className="text-blue-500 hover:text-blue-600">Already have an account? click here!</a>
-    </form>
+        <a href="/login" className="text-blue-500 hover:text-blue-600">Already have an account? click here!</a>
+      </form>
+    </div>
   );
 }
 
