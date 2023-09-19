@@ -6,20 +6,14 @@ import toast from "react-hot-toast"
 import CreateContact from "@/app/components/CreateContact"
 import ContactCard from "@/app/components/ContactCard"
 import EditContact from "@/app/components/EditContact"
-
-interface contact {
-  _id: string,
-  name: string,
-  email: string,
-  phone_number: number,
-  author: string,
-}
+import { contact } from "@/interfaces/contact"
 
 export default function ProfilePage() {
   const [contact, setContact] = useState<contact[]>([])
   const [showForm, setShowForm] = useState(false)
   const [showEditForm, setShowEditForm] = useState(false)
   const [editId, setEditId] = useState("")
+  const [editContactInfo, setEditContactInfo] = useState<contact | null>(null);
   const showHideForm = () => {
     setShowForm(prev => !prev)
   }
@@ -45,8 +39,13 @@ export default function ProfilePage() {
   }
 
   const editContacts = (id: string) => {
-    setEditId(id)
-    showHideEditForm()
+    const editedContact = contact.find((c) => c._id === id)
+    if (editedContact) {
+      setEditId(id)
+      showHideEditForm()
+      setEditContactInfo(editedContact)
+
+    }
   }
 
   useEffect(() => {
@@ -60,7 +59,7 @@ export default function ProfilePage() {
   }, [])
   return (
     <div>
-      {showEditForm && <EditContact showHideForm={showHideEditForm} _id={editId} />}
+      {showEditForm && <EditContact showHideForm={showHideEditForm} contactInfo={editContactInfo} />}
       {showForm && <CreateContact showHideForm={showHideForm} />}
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl">Agenda</h1>

@@ -61,7 +61,7 @@ export default function LoginPage() {
           value={user.password}
           onChange={(value) => handleInputChange("password", value)}
         />
-        <button type="submit" className="bg-blue-500 text-white rounded-full w-20 h-8 my-2 hover:bg-blue-300">{loading ? <LoadingScreen /> : "Login"}</button>
+        <button type="submit" className="bg-blue-500 text-white rounded-full w-20 h-10 my-2 hover:bg-blue-300">{loading ? <LoadingScreen /> : "Login"}</button>
         <a href="/signup" className="text-blue-500 hover:text-blue-600">Don't have an account yet? click here!</a>
       </form>
     </div>
