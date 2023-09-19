@@ -4,6 +4,7 @@ import { Input } from "../components/Input";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import LoadingScreen from "../components/Loading";
 interface User {
   email: string;
   password: string
@@ -13,6 +14,7 @@ export default function LoginPage() {
     email: "",
     password: ""
   })
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
 
@@ -24,20 +26,24 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
+      setLoading(true)
       await axios.post("/api/users/login", user)
       toast.success("Login was successful!")
-      window.location.reload()
-      router.push("/")
+      router.push("/profile")
     } catch (error: any) {
       console.log("Login failed!", error.message);
       toast.error(error.message)
-
+    } finally {
+      setLoading(false)
+      window.location.reload()
     }
   }
   return (
     <div>
-
       <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center my-28 shadow-lg w-3/5 m-auto">
+        <h1 className="p-2 text-3xl">
+          Login
+        </h1>
         <Input
           label="Email"
           value={user.email}
@@ -50,9 +56,8 @@ export default function LoginPage() {
           value={user.password}
           onChange={(value) => handleInputChange("password", value)}
         />
-        <button type="submit" className="bg-blue-500 text-white rounded-full w-20 my-2 hover:bg-blue-300">Sign Up</button>
-
-      <a href="/signup" className="text-blue-500 hover:text-blue-600">Don't have an account yet? click here!</a>
+        <button type="submit" className="bg-blue-500 text-white rounded-full w-20 my-2 hover:bg-blue-300">{loading ? <LoadingScreen /> : "Login"}</button>
+        <a href="/signup" className="text-blue-500 hover:text-blue-600">Don't have an account yet? click here!</a>
       </form>
     </div>
   )
