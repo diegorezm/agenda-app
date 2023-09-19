@@ -21,7 +21,7 @@ export default function Signup() {
     password: ""
   });
 
-  const handleInputChange = (fieldName: string, fieldValue: string) => {
+const handleInputChange = (fieldName: string, fieldValue: string) => {
     const updatedUser = { ...user, [fieldName]: fieldValue };
     setUser(updatedUser);
   };

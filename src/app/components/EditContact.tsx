@@ -5,15 +5,17 @@ import toast from "react-hot-toast";
 import axios from 'axios'
 
 interface props {
+  _id: string,
   showHideForm(): void
 }
 
-export default function CreateContact({ showHideForm }: props) {
+export default function EditContact({ _id, showHideForm }: props) {
   const [isLoading, setIsloading] = useState(false)
   const [contact, setContact] = useState({
     name: "",
     email: "",
-    phone_number: ""
+    phone_number: "",
+    id: _id
   })
 
   const handleInputChange = (fieldName: string, fieldValue: string) => {
@@ -25,13 +27,13 @@ export default function CreateContact({ showHideForm }: props) {
     e.preventDefault()
     try {
       setIsloading(true)
-      await axios.post("/api/contacts/create", contact)
-      toast.success("Contact created successfully!")
+      await axios.post("/api/contacts/edit", contact)
+      toast.success("Contact edited successfully!")
 
     } catch (error: any) {
       console.error(error.message)
-      toast.error("Not able to create contact!")
-    }finally{
+      toast.error("Not able to edit contact!")
+    } finally {
       setIsloading(false)
       showHideForm()
       window.location.reload()
