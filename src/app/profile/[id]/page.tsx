@@ -12,7 +12,6 @@ export default function ProfilePage() {
   const [contact, setContact] = useState<contact[]>([])
   const [showForm, setShowForm] = useState(false)
   const [showEditForm, setShowEditForm] = useState(false)
-  const [editId, setEditId] = useState("")
   const [editContactInfo, setEditContactInfo] = useState<contact | null>(null);
   const showHideForm = () => {
     setShowForm(prev => !prev)
@@ -41,10 +40,8 @@ export default function ProfilePage() {
   const editContacts = (id: string) => {
     const editedContact = contact.find((c) => c._id === id)
     if (editedContact) {
-      setEditId(id)
       showHideEditForm()
       setEditContactInfo(editedContact)
-
     }
   }
 
@@ -54,13 +51,12 @@ export default function ProfilePage() {
     } catch (error: any) {
       console.error(error.message)
       toast.error("Something went wrong!")
-
     }
   }, [])
   return (
     <div>
       {showEditForm && <EditContact showHideForm={showHideEditForm} contactInfo={editContactInfo} />}
-      {showForm && <CreateContact showHideForm={showHideForm} />}
+      {showForm && <CreateContact updateArray={setContact} showHideForm={showHideForm} />}
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl">Agenda</h1>
 

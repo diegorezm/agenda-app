@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { contact } from "@/interfaces/contact";
 import { Input } from "./Input";
 import LoadingScreen from "./Loading";
 import toast from "react-hot-toast";
 import axios from 'axios'
 
 interface props {
-  showHideForm(): void
+  showHideForm(): void,
+  updateArray: (newContact: contact) => void
 }
 
-export default function CreateContact({ showHideForm }: props) {
+export default function CreateContact({ showHideForm , updateArray}: props) {
   const [isLoading, setIsloading] = useState(false)
   const [contact, setContact] = useState({
     name: "",
@@ -25,6 +27,7 @@ export default function CreateContact({ showHideForm }: props) {
     e.preventDefault()
     try {
       setIsloading(true)
+      updateArray((prev) => [...prev, contact])
       await axios.post("/api/contacts/create", contact)
       toast.success("Contact created successfully!")
 
@@ -34,7 +37,6 @@ export default function CreateContact({ showHideForm }: props) {
     }finally{
       setIsloading(false)
       showHideForm()
-      window.location.reload()
     }
   }
   return (

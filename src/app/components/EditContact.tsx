@@ -30,7 +30,6 @@ export default function EditContact({ showHideForm, contactInfo }: props) {
     if (!contactData) {
       return;
     }
-
     try {
       setIsloading(true);
       await axios.post("/api/contacts/edit", contactData);
