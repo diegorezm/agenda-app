@@ -37,12 +37,10 @@ export default function ProfilePage() {
     }
   }
 
-  const editContacts = (id: string) => {
-    const editedContact = contact.find((c) => c._id === id)
-    if (editedContact) {
-      showHideEditForm()
-      setEditContactInfo(editedContact)
-    }
+  const editContacts = (contactObj: contact) => {
+    console.log(contactObj)
+    setEditContactInfo(contactObj)
+    showHideEditForm()
   }
 
   useEffect(() => {
@@ -87,7 +85,7 @@ export default function ProfilePage() {
                 {contact.map((i, j) => (
                   <ContactCard
                     deleteContacts={() => deleteContacts(i._id, j)}
-                    editContacts={() => editContacts(i._id)}
+                    editContacts={() => editContacts(i)}
                     index={j}
                     _id={i._id}
                     name={i.name}

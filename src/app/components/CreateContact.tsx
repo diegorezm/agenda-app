@@ -27,8 +27,10 @@ export default function CreateContact({ showHideForm , updateArray}: props) {
     e.preventDefault()
     try {
       setIsloading(true)
-      updateArray((prev) => [...prev, contact])
-      await axios.post("/api/contacts/create", contact)
+      const request = await axios.post("/api/contacts/create", contact)
+      const newContact = request.data.newContact;
+      
+      updateArray((prev) => [...prev, newContact])
       toast.success("Contact created successfully!")
 
     } catch (error: any) {

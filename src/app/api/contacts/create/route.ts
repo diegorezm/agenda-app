@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
     newContact.save()
     return NextResponse.json({
       message: "Contact created!",
-      success: true
+      success: true,
+      newContact
     })
 
   } catch (error: any) {
