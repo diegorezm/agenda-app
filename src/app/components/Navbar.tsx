@@ -21,9 +21,10 @@ const Profile = () => {
       <div className="group">
         <div className="flex flex-row cursor-pointer">
           <span className="text-white hover:text-blue-100">Profile</span>
-          <svg className=" w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          <svg className="w-5 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
           </svg>
+
         </div>
         <div className="hidden absolute right-2 group-hover:flex group-hover:flex-col  group-hover:bg-white group-hover:w-16 group-hover:h-16 group-hover:justify-center group-hover:items-center hover:cursor-pointer rounded">
           <div className="hover:text-blue-800">
