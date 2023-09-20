@@ -55,8 +55,23 @@ export default function ProfilePage() {
   }, [])
   return (
     <div>
-      {showEditForm && <EditContact showHideForm={showHideEditForm} contactInfo={editContactInfo} />}
       {showForm && <CreateContact updateArray={setContact} showHideForm={showHideForm} />}
+      {showEditForm && (
+        <EditContact
+          showHideForm={showHideEditForm}
+          updateArray={(updatedContact) => {
+            const updatedContacts = [...contact];
+            const index = updatedContacts.findIndex((c) => c._id === updatedContact._id);
+            if (index !== -1) {
+              updatedContacts[index] = updatedContact;
+              setContact(updatedContacts);
+            }
+          }}
+          contactInfo={editContactInfo}
+        />
+      )}
+
+
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl">Agenda</h1>
 

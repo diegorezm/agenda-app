@@ -7,8 +7,8 @@ import { Toaster } from 'react-hot-toast'
 const roboto = Roboto({ subsets: ['latin'], weight: ["400", "500", "700"] })
 
 export const metadata: Metadata = {
-  title: 'Calendar',
-  description: 'Calendar app',
+  title: 'Agenda',
+  description: 'Agenda app',
 }
 
 export default function RootLayout({

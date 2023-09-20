@@ -6,11 +6,12 @@ import axios from 'axios'
 import { contact } from "@/interfaces/contact";
 
 interface props {
-  showHideForm(): void
-  contactInfo: contact;
+  showHideForm(): void,
+  contactInfo: contact,
+  updateArray: (updatedContact: contact) => void
 }
 
-export default function EditContact({ showHideForm, contactInfo }: props) {
+export default function EditContact({ showHideForm, contactInfo , updateArray}: props) {
   const [isLoading, setIsloading] = useState(false);
   const [contactData, setContactData] = useState<contact>(contactInfo);
 
@@ -32,15 +33,16 @@ export default function EditContact({ showHideForm, contactInfo }: props) {
     }
     try {
       setIsloading(true);
+      updateArray(contactData)
       await axios.post("/api/contacts/edit", contactData);
       toast.success("Contact edited successfully!");
+
     } catch (error: any) {
       console.error(error.message);
       toast.error("Not able to edit the contact!");
     } finally {
       setIsloading(false);
       showHideForm();
-      window.location.reload();
     }
   }
 
