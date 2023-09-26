@@ -81,6 +81,16 @@ export default function ProfilePage() {
               <h2 className="text-lg text-gray-700">Your contacts:</h2>
             </div>
             <table className="w-1/2">
+              <thead className="border-b font-medium bg-gray-100 dark:border-neutral-500">
+                <tr>
+                  <th scope="col" className="px-6 py-4">#</th>
+                  <th scope="col" className="px-6 py-4">Name</th>
+                  <th scope="col" className="px-6 py-4">Email</th>
+                  <th scope="col" className="px-6 py-4">Phone</th>
+                  <th scope="col" className="px-6 py-4">Edit</th>
+                  <th scope="col" className="px-6 py-4">Delete</th>
+                </tr>
+              </thead>
               <tbody>
                 {contact.map((i, j) => (
                   <ContactCard
