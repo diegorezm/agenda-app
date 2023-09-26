@@ -12,7 +12,7 @@ export default function ProfilePage() {
   const [contact, setContact] = useState<contact[]>([])
   const [showForm, setShowForm] = useState(false)
   const [showEditForm, setShowEditForm] = useState(false)
-  const [editContactInfo, setEditContactInfo] = useState<contact | null>(null);
+  const [editContactInfo, setEditContactInfo] = useState<contact | null>();
   const showHideForm = () => {
     setShowForm(prev => !prev)
   }
@@ -74,7 +74,7 @@ export default function ProfilePage() {
         <h1 className="text-4xl">Agenda</h1>
 
         {contact.length === 0 ? (
-          <p className="text-gray-500 py-2">You don't have any contacts :(</p>
+          <p className="text-gray-500 py-2">You don't have any contacts!</p>
         ) : (
           <div>
             <div className="flex items-center justify-center m-2">
